@@ -21,7 +21,7 @@ async function connect(){
 
 connect();
 
-/*==================Listando os Clientes===================*/
+/*==================Listando todos os Clientes===================*/
 async function selectClientes(){
     const conn = await connect();
     const [rows] = await conn.query('SELECT *FROM clientes;');
@@ -29,13 +29,30 @@ async function selectClientes(){
 
 };
 
+/*==================Localizando um Cliente específico==============*/
+async function selectCliente(id){
+    const conn = await connect();
+    const sql = "SELECT *FROM clientes WHERE id=?;";
+    const[rows] = await conn.query(sql, [id]);
+
+    return rows && rows.length > 0 ? rows[0] : {};
+}
+
+
 /*=================Cadastrando Novos Clientes==============*/
 async function insertCliente(cliente){
     const conn = await connect();
     const sql = "INSERT INTO clientes(nome, idade, uf) VALUE (?, ?, ?);";
     return await conn.query(sql,[cliente.nome, cliente.idade, cliente.uf]);
+}
 
+/*==================Atualizando Cliente==================*/
+async function updateCliente(id, cliente){
+    const conn = await connect();
+    const sql = "UPDATE clientes SET nome=?, idade=?, uf=? WHERE id=?;";
+
+    return await conn.query(sql, [cliente.nome, cliente.idade, cliente.uf, id])
 }
 
 
-module.exports = {selectClientes, insertCliente};
+module.exports = {selectClientes, selectCliente, insertCliente, updateCliente};

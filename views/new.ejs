@@ -2,25 +2,26 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">    
-    <title>CRUD de Clientes</title>
-    <link rel="stylesheet" href="./stylesheets/style.css">
+    <title>CRUD de Clientes</title>    
+    <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
     <h1><%=title%></h1>
     <p>Preencha os dados abaixo para salvar o cliente</p>
     <form action="<%=action%>" method="POST">
         <p>
-            <label>Nome:<input type="text" name="nome"></label>            
+            <label>Nome:<input type="text" name="nome" value="<%=result.nome%>"></label>            
         </p>
         <p>
-            <label>Idade:<input type="number" name="idade"></label>            
+            <label>Idade:<input type="number" name="idade" value="<%=result.idade%>"></label>            
         </p>
         <p>
             <label>UF:<select name="uf">
-                <option >RS</option>
-                <option >SC</option>
-                <option >PR</option>
-                <option >MG</option>
+                <% const s = "selected"%>
+                <option <% if(result.uf === "RS"){ %> <%=s %><%}%> >RS</option>
+                <option <% if(result.uf === "SC"){ %> <%=s %><%}%> >SC</option>
+                <option <% if(result.uf === "PR"){ %> <%=s %><%}%> >PR</option>
+                <option <% if(result.uf === "MG"){ %> <%=s %><%}%> >MG</option>
             </select></label>
         </p>
         <p>
