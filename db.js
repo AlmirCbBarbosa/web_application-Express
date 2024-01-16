@@ -54,5 +54,11 @@ async function updateCliente(id, cliente){
     return await conn.query(sql, [cliente.nome, cliente.idade, cliente.uf, id])
 }
 
+/*================Deletar Cliente===============================*/
+async function deleteCliente(id){
+    const conn = await connect();
+    sql = 'DELETE FROM clientes WHERE id=?;';
+    return await conn.query(sql,[id]);
+}
 
-module.exports = {selectClientes, selectCliente, insertCliente, updateCliente};
+module.exports = {selectClientes, selectCliente, insertCliente, updateCliente, deleteCliente};

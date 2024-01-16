@@ -63,4 +63,17 @@ router.post('/edit/:id', async (req, res)=>{
   }
 });
 
+/*Get delete page*/
+router.get('/delete/:id', async (req, res)=>{
+  const id = parseInt(req.params.id);
+
+  try{
+    await global.db.deleteCliente(id);
+    res.redirect('/?delete=true');
+  }
+  catch(error){
+    res.redirect('/?error' + error);
+  }
+})
+
 module.exports = router;

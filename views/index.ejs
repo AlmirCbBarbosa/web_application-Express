@@ -29,7 +29,10 @@
               <td style="width:50%"><%= cliente.nome %></td>
               <td style="width:15%"><%= cliente.idade %></td>
               <td style="width:15%"><%= cliente.uf %></td>
-              <td><a href="/edit/<%=cliente.id %>">Editar</a></td>
+              <td>
+                <a href="/edit/<%=cliente.id %>">Editar</a>
+                <a href="/delete/<%=cliente.id%>" onclick="return confirm('Tem certeza?')">Excluir</a>
+              </td>
             </tr>
           <% }) 
         }%>
@@ -42,5 +45,19 @@
         </tr>
       </tfoot>
     </table>
+    <script>
+      if(location.href.indexOf('delete=true') != -1){
+        alert('Cliente excluído com sucesso!');
+      }
+      else if(location.href.indexOf('edit=true') != -1){
+        alert('Cliente editado com sucesso!');        
+      }
+      else if(location.href.indexOf('new=true') != -1){
+        alert('Cliente cadastrado com sucesso!');
+      }
+      else if(location.href.indexOf('erro') != -1){
+        alert('Ocorreu um erro!');
+      }
+    </script>
   </body>
 </html>
